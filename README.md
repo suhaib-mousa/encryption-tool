@@ -31,7 +31,7 @@ Enter a **string to encrypt** and a **custom encryption key**, and the tool will
 - **ABP Framework**
 
 ## 💡 Help Wanted: Contributions Welcome!
-We welcome contributions to enhance this tool! Here are some ways you can help:
+We welcome contributions to enhance this tool! Check out our [Contribution Guidelines](CONTRIBUTING.md) for details.
 
 - Add support for **new encryption algorithms**.
 - Improve **code optimization**.

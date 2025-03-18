@@ -34,10 +34,11 @@ Enter a **string to encrypt** and a **custom encryption key**, and the tool will
 We welcome contributions to enhance this tool! Here are some ways you can help:
 
 - Add support for **new encryption algorithms**.
-- Improve **error handling** and **input validation**.
+- Improve **code optimization**.
 - Enhance the **user experience** with better CLI interactions.
 - Expand **configuration options** for more flexibility.
 - Optimize performance and security improvements.
+- Contribute **new ideas** to improve features or introduce additional functionality.
 
 ## 📜 License
 This project is licensed under the **MIT License**.

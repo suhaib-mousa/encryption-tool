@@ -29,6 +29,6 @@ Enter a **string to encrypt** and a **custom encryption key**, and the tool will
 ## 🛠 Tech Stack
 - **C# (.NET)**
 - **ABP Framework**
-- 
+
 ## 📜 License
 This project is licensed under the **MIT License**.

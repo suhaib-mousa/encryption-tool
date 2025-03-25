@@ -14,7 +14,7 @@ public class EncryptionToolHostedService : IHostedService
     private readonly IConfiguration _configuration;
     public EncryptionToolHostedService(EncryptionService encryptionService, IConfiguration configuration)
     {
-        _encryptionService = encryptionService;2
+        _encryptionService = encryptionService;
         _configuration = configuration;
     }
 

@@ -31,6 +31,7 @@ public class EncryptionToolHostedService : IHostedService
             }
 
             // TODO: Store and retrieve the encryption key from appsettings.json to avoid asking the user each time
+            // Issue URL: https://github.com/suhaib-mousa/encryption-tool/issues/4
             Console.Write("Enter the value: ");
             var inputValue = Console.ReadLine()?.Trim();
 

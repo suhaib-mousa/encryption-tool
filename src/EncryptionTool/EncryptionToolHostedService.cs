@@ -30,6 +30,7 @@ public class EncryptionToolHostedService : IHostedService
                 break;
             }
 
+            // TODO: Store and retrieve the encryption key from appsettings.json to avoid asking the user each time
             Console.Write("Enter the value: ");
             var inputValue = Console.ReadLine()?.Trim();
 

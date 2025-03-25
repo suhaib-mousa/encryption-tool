@@ -16,6 +16,7 @@ public class EncryptionToolHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
+        // TODO enhance the user experience by adding a menu with options to encrypt, decrypt, or exit
         Console.WriteLine("Welcome to the Encryption Tool!");
         Console.WriteLine("----------------------------------");
 

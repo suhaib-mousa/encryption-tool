@@ -18,4 +18,10 @@ public class EncryptionService : ITransientDependency
         string encryptedValue = _stringEncryptionService.Encrypt(rawValue, encryptionKey)!;
         Console.WriteLine($"Encrypted value: {encryptedValue}");
     }
+    
+    public void DecryptAndPrint(string encryptedValue, string encryptionKey)
+    {
+        string decryptedValue = _stringEncryptionService.Decrypt(encryptedValue, encryptionKey)!;
+        Console.WriteLine($"Decrypted value: {decryptedValue}");
+    }
 }

@@ -21,13 +21,22 @@ public class EncryptionToolHostedService : IHostedService
 
         while (!cancellationToken.IsCancellationRequested)
         {
-            Console.Write("Enter the value to encrypt (or type 'exit' to quit): ");
-            var rawValue = Console.ReadLine()?.Trim();
+            Console.Write("Choose operation [encrypt/decrypt/exit]: ");
+            var operation = Console.ReadLine()?.Trim().ToLowerInvariant();
 
-            if (string.IsNullOrEmpty(rawValue) || rawValue.Equals("exit", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(operation) || operation == "exit")
             {
                 Console.WriteLine("Exiting the encryption tool...");
                 break;
+            }
+
+            Console.Write("Enter the value: ");
+            var inputValue = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrEmpty(inputValue))
+            {
+                Console.WriteLine("Value cannot be empty. Please try again.");
+                continue;
             }
 
             Console.Write("Enter your encryption key: ");
@@ -41,12 +50,26 @@ public class EncryptionToolHostedService : IHostedService
 
             try
             {
-                _encryptionService.EncryptAndPrint(rawValue, encryptionKey);
-                Console.WriteLine("Encryption successful!\n");
+                switch (operation)
+                {
+                    case "encrypt":
+                        _encryptionService.EncryptAndPrint(inputValue, encryptionKey);
+                        Console.WriteLine("Encryption successful!\n");
+                        break;
+
+                    case "decrypt":
+                        _encryptionService.DecryptAndPrint(inputValue, encryptionKey);
+                        Console.WriteLine("Decryption successful!\n");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid operation. Please type 'encrypt', 'decrypt', or 'exit'.\n");
+                        break;
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error during encryption: {ex.Message}\n");
+                Console.WriteLine($"Error during {operation}: {ex.Message}\n");
             }
         }
     }

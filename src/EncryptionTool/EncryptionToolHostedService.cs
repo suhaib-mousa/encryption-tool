@@ -3,15 +3,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
+using Microsoft.Extensions.Configuration;
+
 
 namespace EncryptionTool;
 
 public class EncryptionToolHostedService : IHostedService
 {
     private readonly EncryptionService _encryptionService;
-    public EncryptionToolHostedService(EncryptionService encryptionService)
+    private readonly IConfiguration _configuration;
+    public EncryptionToolHostedService(EncryptionService encryptionService, IConfiguration configuration)
     {
-        _encryptionService = encryptionService;
+        _encryptionService = encryptionService;2
+        _configuration = configuration;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -34,22 +38,22 @@ public class EncryptionToolHostedService : IHostedService
 
             // TODO: Store and retrieve the encryption key from appsettings.json to avoid asking the user each time
             // Issue URL: https://github.com/suhaib-mousa/encryption-tool/issues/4
-            Console.Write("Enter the value: ");
-            var inputValue = Console.ReadLine()?.Trim();
-
-            if (string.IsNullOrEmpty(inputValue))
-            {
-                Console.WriteLine("Value cannot be empty. Please try again.");
-                continue;
-            }
-
-            Console.Write("Enter your encryption key: ");
-            var encryptionKey = Console.ReadLine()?.Trim();
-
+        
+            var encryptionKey = _configuration["encryptionKey"];
             if (string.IsNullOrEmpty(encryptionKey))
             {
-                Console.WriteLine("Encryption key cannot be empty. Please try again.");
-                continue;
+                Console.Write("Enter your encryption key: ");
+                encryptionKey = Console.ReadLine()?.Trim();
+                if (string.IsNullOrEmpty(encryptionKey))
+                {
+                    Console.WriteLine("Encryption key cannot be empty. Please try again.");
+                    continue;
+                }
+                _configuration["encryptionKey"] = encryptionKey;
+            }
+            else
+            {
+                Console.WriteLine("Using Encryption key from configuration file");
             }
 
             try

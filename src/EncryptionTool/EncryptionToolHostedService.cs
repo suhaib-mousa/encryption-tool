@@ -55,6 +55,16 @@ public class EncryptionToolHostedService : IHostedService
             {
                 Console.WriteLine("Using Encryption key from configuration file");
             }
+            
+            //taking inputValue from user
+            Console.Write("Enter the value: ");
+            var inputValue = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrEmpty(inputValue))
+            {
+                Console.WriteLine("Value cannot be empty. Please try again.");
+                continue;
+            }
 
             try
             {

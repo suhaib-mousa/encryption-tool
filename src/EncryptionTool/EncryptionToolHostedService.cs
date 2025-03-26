@@ -36,9 +36,6 @@ public class EncryptionToolHostedService : IHostedService
                 break;
             }
 
-            // TODO: Store and retrieve the encryption key from appsettings.json to avoid asking the user each time
-            // Issue URL: https://github.com/suhaib-mousa/encryption-tool/issues/4
-        
             var encryptionKey = _configuration["encryptionKey"];
             if (string.IsNullOrEmpty(encryptionKey))
             {

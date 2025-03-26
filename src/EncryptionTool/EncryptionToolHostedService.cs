@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
 using Microsoft.Extensions.Configuration;
+using EncryptionTool.Helpers;
 
 
 namespace EncryptionTool;
@@ -39,21 +40,12 @@ public class EncryptionToolHostedService : IHostedService
             var encryptionKey = _configuration["encryptionKey"];
             if (string.IsNullOrEmpty(encryptionKey))
             {
-                Console.Write("Enter your encryption key: ");
-                encryptionKey = Console.ReadLine()?.Trim();
-                if (string.IsNullOrEmpty(encryptionKey))
-                {
-                    Console.WriteLine("Encryption key cannot be empty. Please try again.");
-                    continue;
-                }
-                _configuration["encryptionKey"] = encryptionKey;
+                ConsoleHelper.WriteLineInColor("❌ Missing 'encryptionKey' in appsettings.json. Please add it and restart the tool.\n", ConsoleColor.Red);
+                continue;
             }
-            else
-            {
-                Console.WriteLine("Using Encryption key from configuration file");
-            }
-            
-            //taking inputValue from user
+
+            ConsoleHelper.WriteLineInColor("✅ Using encryption key from configuration.", ConsoleColor.Green);
+
             Console.Write("Enter the value: ");
             var inputValue = Console.ReadLine()?.Trim();
 
@@ -84,7 +76,7 @@ public class EncryptionToolHostedService : IHostedService
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error during {operation}: {ex.Message}\n");
+                ConsoleHelper.WriteLineInColor($"Error during {operation}: {ex.Message}\n", ConsoleColor.Red);
             }
         }
     }
